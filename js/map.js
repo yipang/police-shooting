@@ -87,13 +87,19 @@ var customBuild = function(data, map) {
       } 
     }
   });
-      
+
 	// Once layers are on the map, add a leaflet controller that shows/hides layers
   var genderLayers = {
     "male": maleLayer,
     "female": femaleLayer,
     "notSure": notSure,
   }
+  $('#whitef').text(femaleWhite);
+  $('#whitem').text(maleWhite);
+  $('#whiten').text(notSureWhite);
+  $('#nonewhitef').text(femaleNoneWhite);
+  $('#nonewhitem').text(maleNoneWhite);
+  $('#nonewhiten').text(notSureNoneWhite);
   L.control.layers(null, genderLayers).addTo(map);
   
 }
