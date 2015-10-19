@@ -22,6 +22,7 @@ var getData = function(map) {
     url:'data/response.json',
     type: "get",
     success:function(data) {
+        console.log(data);
         customBuild(data, map);
     },
     dataType:"json",
@@ -36,29 +37,54 @@ var customBuild = function(data, map) {
   var maleLayer = new L.LayerGroup([]);
   var notSure = new L.LayerGroup([]);
 
+  var femaleWhite = 0;
+  var maleWhite = 0;
+  var notSureWhite = 0;
+  var femaleNoneWhite = 0;
+  var maleNoneWhite = 0;
+  var notSureNoneWhite = 0;
   data.forEach(function(data) {
+
 
     if (data["Victim's Gender"] == 'Female') {
       var circle = new L.circleMarker([data["lat"], data["lng"]], {
         radius: 7,
         fillOpacity: 0.4,
-        color: red
+        color: 'red'
       }); 
-      circle.addTo(femaleLayer);     
+      circle.addTo(femaleLayer);  
+      circle.bindPopup(data["Summary"]);
+      if (data["Race"] == 'White') {
+        femaleWhite++;
+      } else {
+        femaleNoneWhite++;
+      }
     } else if (data["Victim's Gender"] == 'Male') {
       var circle = new L.circleMarker([data["lat"], data["lng"]], {
         radius: 7,
         fillOpacity: 0.4,
-        color: black
+        color: 'blue'
       });
-      circle.addTo(maleLayer);         
+      circle.addTo(maleLayer);
+      circle.bindPopup(data["Summary"]);
+      if (data["Race"] == 'White') {
+        maleWhite++;
+      } else {
+        maleNoneWhite++;
+      }        
     } else {
         var circle = new L.circleMarker([data["lat"], data["lng"]], {
         radius: 7,
         fillOpacity: 0.4,
-        color: grey
+        color: 'grey'
       });
-      circle.addTo(notSure);   
+      circle.addTo(notSure); 
+      circle.bindPopup(data["Summary"]); 
+      if (data["Race"] == 'White') {
+        notSureWhite++;
+      } else {
+        notSureNoneWhite++;
+      } 
     }
   });
       
