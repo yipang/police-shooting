@@ -24,7 +24,7 @@ var getData = function(map) {
     success:function(data) {
         customBuild(data, map);
     },
-    dataType:"json"
+    dataType:"json",
   })
   // When your request is successful, call your customBuild function
 }
@@ -41,22 +41,22 @@ var customBuild = function(data, map) {
     if (data["Victim's Gender"] == 'Female') {
       var circle = new L.circleMarker([data["lat"], data["lng"]], {
         radius: 7,
-        fillOpacity: 0.4;
-        color: red;
+        fillOpacity: 0.4,
+        color: red
       }); 
       circle.addTo(femaleLayer);     
     } else if (data["Victim's Gender"] == 'Male') {
       var circle = new L.circleMarker([data["lat"], data["lng"]], {
         radius: 7,
-        fillOpacity: 0.4;
-        color: black;
+        fillOpacity: 0.4,
+        color: black
       });
       circle.addTo(maleLayer);         
     } else {
         var circle = new L.circleMarker([data["lat"], data["lng"]], {
         radius: 7,
-        fillOpacity: 0.4;
-        color: grey;
+        fillOpacity: 0.4,
+        color: grey
       });
       circle.addTo(notSure);   
     }
@@ -64,8 +64,8 @@ var customBuild = function(data, map) {
       
 	// Once layers are on the map, add a leaflet controller that shows/hides layers
   var genderLayers = {
-    "maleLayer": maleLayer,
-    "femaleLayer": femaleLayer,
+    "male": maleLayer,
+    "female": femaleLayer,
     "notSure": notSure,
   }
   L.control.layers(null, genderLayers).addTo(map);
